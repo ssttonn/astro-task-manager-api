@@ -3,14 +3,14 @@ const taskController = require("../controllers/taskController")
 
 const router = express.Router()
 
-router.use(express.urlencoded({ extended: true }))
-
 router.get("/", taskController.getAllTasks)
 
 router.get("/:taskId", taskController.getTaskById)
 
+router.use(express.urlencoded({ extended: true }))
+
 router.post("/create", taskController.createTask)
 
-router.put("/:taskId", taskController.updateTask)
+router.patch("/:taskId", taskController.updateTask)
 
 module.exports = router

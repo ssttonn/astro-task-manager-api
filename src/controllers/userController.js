@@ -21,7 +21,7 @@ exports.getUserById = async (req, res, next) => {
     try {
         let user;
         try {
-            user = await User.findOne(ObjectId.createFromHexString(userId)).select(['-password', '-__v']).exec()
+            user = await User.findById(userId).select(['-password', '-__v']).exec()
         } catch (e) {
             throw new HttpError(400, "User not found")
         }
