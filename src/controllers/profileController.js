@@ -20,6 +20,15 @@ exports.getProfile = async (req, res, next) => {
 
 exports.updateProfile = async (req, res, next) => {
     try {
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ["name", "password"]
+
+        const isValidOperation = updates.every(update => allowedUpdates.includes(update))
+
+        if (!isValidOperation) {
+            throw new HttpError(400, "Invalid updates")
+        }
+
         const {id} = req.userInfo
 
         const updateBody = req.body
